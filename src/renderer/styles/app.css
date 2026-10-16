@@ -32,7 +32,7 @@ body {
   margin: 0;
   padding: 0;
   height: 100%;
-  font-family: 'Segoe UI', 'Malgun Gothic', 'Noto Sans KR', sans-serif;
+  font-family: 'Segoe UI', 'Microsoft YaHei UI', 'Microsoft YaHei', 'Noto Sans SC', sans-serif;
   background: linear-gradient(180deg, #eaf0f8 0%, #f5f8fd 100%);
   color: var(--text);
   overflow: hidden;
