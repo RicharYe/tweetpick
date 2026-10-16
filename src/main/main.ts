@@ -393,7 +393,7 @@ async function runRtDraw(input: unknown, sendProgress: (progress: DrawProgressEv
 
   sendProgress({
     type: 'status',
-    message: '참여자 수집을 시작합니다.',
+    message: '开始收集参与者。',
   });
 
   if (parsedInput.sources.rt) {
@@ -502,7 +502,7 @@ async function runRtDraw(input: unknown, sendProgress: (progress: DrawProgressEv
 
   sendProgress({
     type: 'status',
-    message: '추첨이 완료되었습니다.',
+    message: '抽奖完成。',
   });
 
   return {
@@ -580,9 +580,9 @@ function escapeHtml(value: unknown): string {
 function formatCountLabel(value: unknown): string {
   const number = Number(value);
   if (!Number.isFinite(number)) {
-    return '0명';
+    return '0 人';
   }
-  return `${number.toLocaleString('ko-KR')}명`;
+  return `${number.toLocaleString('zh-CN')} 人`;
 }
 
 function resolveResultImageData(rawResult: unknown): ResultImageData | null {
@@ -627,11 +627,11 @@ function buildResultImageHtml(rawResult: unknown): string {
 
   const rowsHtml =
     result.winners.length === 0
-      ? '<tr><td colspan="3" class="empty">당첨자가 없습니다.</td></tr>'
+      ? '<tr><td colspan="3" class="empty">没有中奖者。</td></tr>'
       : result.winners
           .map((winner, index) => {
             const rank = index + 1;
-            const idText = winner.screenName ? `@${winner.screenName}` : '(아이디 없음)';
+            const idText = winner.screenName ? `@${winner.screenName}` : '（无用户名）';
             return [
               '<tr>',
               `<td>${rank}</td>`,
@@ -643,10 +643,10 @@ function buildResultImageHtml(rawResult: unknown): string {
           .join('');
 
   return `<!doctype html>
-<html lang="ko">
+<html lang="zh-CN">
   <head>
     <meta charset="UTF-8" />
-    <title>추첨 결과 이미지</title>
+    <title>抽奖结果图片</title>
     <style>
       :root {
         color-scheme: light;
@@ -660,7 +660,7 @@ function buildResultImageHtml(rawResult: unknown): string {
         padding: 0;
         background: #f3f5fb;
         color: #1a2533;
-        font-family: "Segoe UI", "Malgun Gothic", "Noto Sans KR", sans-serif;
+        font-family: "Segoe UI", "Microsoft YaHei UI", "Microsoft YaHei", "Noto Sans SC", sans-serif;
       }
       .sheet {
         width: ${RESULT_IMAGE_VIEWPORT_WIDTH}px;
@@ -725,21 +725,21 @@ function buildResultImageHtml(rawResult: unknown): string {
   <body>
     <main class="sheet">
       <section class="panel">
-        <h1 class="title">추첨 결과</h1>
+        <h1 class="title">抽奖结果</h1>
         <div class="summary">
-          <div class="label">기준 트윗</div>
+          <div class="label">目标推文</div>
           <div class="value">${escapeHtml(result.tweetLink)}</div>
-          <div class="label">참여자</div>
+          <div class="label">参与者</div>
           <div class="value">${escapeHtml(formatCountLabel(result.eligibleCount))}</div>
-          <div class="label">추첨 인원</div>
+          <div class="label">中奖人数</div>
           <div class="value">${escapeHtml(formatCountLabel(result.winnersRequested))}</div>
         </div>
         <table>
           <thead>
             <tr>
               <th>#</th>
-              <th>아이디</th>
-              <th>닉네임</th>
+              <th>用户名</th>
+              <th>昵称</th>
             </tr>
           </thead>
           <tbody>${rowsHtml}</tbody>
@@ -902,7 +902,7 @@ function createInfoWindow(parentWindow: BrowserWindow | null): BrowserWindow {
     show: false,
     parent: parentWindow || undefined,
     backgroundColor: '#f3f5fb',
-    title: '이용 방법 안내',
+    title: '使用说明',
     webPreferences: {
       preload: path.join(__dirname, '../preload/preload.js'),
       contextIsolation: true,
@@ -940,7 +940,7 @@ function createLegalWindow(parentWindow: BrowserWindow | null): BrowserWindow {
     show: false,
     parent: parentWindow || undefined,
     backgroundColor: '#f3f5fb',
-    title: '라이선스',
+    title: '许可证',
     webPreferences: {
       preload: path.join(__dirname, '../preload/preload.js'),
       contextIsolation: true,
@@ -1008,7 +1008,7 @@ function registerIpcHandlers() {
       if (!notice || !license) {
         return {
           ok: false,
-          message: '라이선스 문서를 불러오지 못했습니다.',
+          message: '无法加载许可证文档。',
         };
       }
 
@@ -1020,7 +1020,7 @@ function registerIpcHandlers() {
     } catch {
       return {
         ok: false,
-        message: '라이선스 문서를 불러오지 못했습니다.',
+        message: '无法加载许可证文档。',
       };
     }
   });
@@ -1032,7 +1032,7 @@ function registerIpcHandlers() {
       if (!window) {
         return {
           ok: false,
-          message: '창 정보를 확인하지 못했습니다.',
+          message: '无法获取窗口信息。',
         };
       }
 
@@ -1048,7 +1048,7 @@ function registerIpcHandlers() {
           if (!captureRect) {
             return {
               ok: false,
-              message: '저장할 영역이 올바르지 않습니다.',
+              message: '保存区域无效。',
             };
           }
 
@@ -1056,7 +1056,7 @@ function registerIpcHandlers() {
           if (!image || image.isEmpty()) {
             return {
               ok: false,
-              message: '이미지 생성에 실패했습니다.',
+              message: '生成图片失败。',
             };
           }
           pngBuffer = image.toPNG();
@@ -1065,16 +1065,16 @@ function registerIpcHandlers() {
         if (!pngBuffer || pngBuffer.length === 0) {
           return {
             ok: false,
-            message: '이미지 생성에 실패했습니다.',
+            message: '生成图片失败。',
           };
         }
 
         const saveResult = await dialog.showSaveDialog(window, {
-          title: '이미지 저장',
+          title: '保存图片',
           defaultPath: getDefaultImagePath(),
           filters: [
             {
-              name: 'PNG 이미지',
+              name: 'PNG 图片',
               extensions: ['png'],
             },
           ],
@@ -1096,7 +1096,7 @@ function registerIpcHandlers() {
       } catch {
         return {
           ok: false,
-          message: '이미지 저장 중 오류가 발생했습니다.',
+          message: '保存图片时发生错误。',
         };
       }
     }
