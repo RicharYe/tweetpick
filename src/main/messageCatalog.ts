@@ -1,50 +1,50 @@
-const DEFAULT_ERROR_MESSAGE = '추첨 중 오류가 발생했습니다. 입력값을 확인한 뒤 다시 시도해 주세요.';
-const DEFAULT_RETRY_MESSAGE = '일시적 오류로 재시도합니다.';
-const DEFAULT_TERMINATION_REASON = '알 수 없음';
+const DEFAULT_ERROR_MESSAGE = '抽奖时发生错误。请检查输入后重试。';
+const DEFAULT_RETRY_MESSAGE = '发生暂时性错误，正在重试。';
+const DEFAULT_TERMINATION_REASON = '未知';
 
 const ERROR_MESSAGE_RULES: ReadonlyArray<readonly [string, string]> = Object.freeze([
-  ['`--auth-token` is required.', 'auth_token을 입력해 주세요.'],
-  ['`--ct0` is required.', 'ct0를 입력해 주세요.'],
-  ['`--tweet-url` is required.', '트윗 링크를 입력해 주세요.'],
-  ['`--tweet-url` must be a valid URL.', '트윗 링크 형식이 올바르지 않습니다.'],
-  ['`--tweet-url` must point to x.com or twitter.com.', '트윗 링크는 x.com 또는 twitter.com 이어야 합니다.'],
-  ['Could not find `/status/{tweetId}`', '트윗 링크에서 status ID를 찾지 못했습니다.'],
-  ['Extracted tweetId is invalid', '트윗 링크의 status ID가 올바르지 않습니다.'],
-  ['Could not infer tweet author', '트윗 작성자 정보를 링크에서 확인하지 못했습니다.'],
-  ['At least one source must be selected.', '참여 소스를 1개 이상 선택해 주세요.'],
-  ['winners must be a positive integer', '당첨 인원은 1 이상의 숫자여야 합니다.'],
-  ['minFollowers must be a non-negative integer', '팔로워 최소값은 0 이상의 정수여야 합니다.'],
-  ['Authentication failed', '인증에 실패했습니다. auth_token 또는 ct0가 유효한지 확인해 주세요.'],
-  ['Rate limited', '요청 제한에 도달했습니다. 잠시 후 다시 시도해 주세요.'],
-  ['Request failed with status 404.', 'X API 경로를 찾지 못했습니다. operation id가 만료되었을 수 있습니다.'],
-  ['Network error', '네트워크 오류가 발생했습니다. 인터넷 연결을 확인해 주세요.'],
-  ['timed out', '요청 시간이 초과되었습니다. 잠시 후 다시 시도해 주세요.'],
-  ['Server error', 'X 서버 오류가 발생했습니다. 잠시 후 다시 시도해 주세요.'],
-  ['GraphQL returned errors', 'X GraphQL 응답에서 오류가 발생했습니다. 잠시 후 다시 시도해 주세요.'],
-  ['Not enough participants', '추첨 가능한 참여자가 부족합니다. 당첨 인원을 줄여 주세요.'],
+  ['`--auth-token` is required.', '请输入 auth_token。'],
+  ['`--ct0` is required.', '请输入 ct0。'],
+  ['`--tweet-url` is required.', '请输入推文链接。'],
+  ['`--tweet-url` must be a valid URL.', '推文链接格式不正确。'],
+  ['`--tweet-url` must point to x.com or twitter.com.', '推文链接必须来自 x.com 或 twitter.com。'],
+  ['Could not find `/status/{tweetId}`', '无法从推文链接中找到 status ID。'],
+  ['Extracted tweetId is invalid', '推文链接中的 status ID 无效。'],
+  ['Could not infer tweet author', '无法从链接中识别推文作者。'],
+  ['At least one source must be selected.', '请至少选择一种参与类型。'],
+  ['winners must be a positive integer', '中奖人数必须是大于或等于 1 的整数。'],
+  ['minFollowers must be a non-negative integer', '最低粉丝数必须是大于或等于 0 的整数。'],
+  ['Authentication failed', '身份验证失败，请检查 auth_token 和 ct0 是否有效。'],
+  ['Rate limited', '已达到请求限制，请稍后重试。'],
+  ['Request failed with status 404.', '找不到 X API 路径，operation id 可能已过期。'],
+  ['Network error', '网络错误，请检查网络连接。'],
+  ['timed out', '请求超时，请稍后重试。'],
+  ['Server error', 'X 服务器出错，请稍后重试。'],
+  ['GraphQL returned errors', 'X GraphQL 响应出错，请稍后重试。'],
+  ['Not enough participants', '符合条件的参与者不足，请减少中奖人数。'],
   [
     'Missing required Twitter configuration',
-    'Twitter 설정 env가 누락되었습니다. .env 파일에 TWITTER_BEARER, TWITTER_RETWEETERS_OP_ID, TWITTER_FAVORITERS_OP_ID, TWITTER_SEARCH_TIMELINE_OP_ID, TWITTER_TWEET_DETAIL_OP_ID를 설정해 주세요.',
+    '缺少 Twitter 配置。请在 .env 文件中设置 TWITTER_BEARER、TWITTER_RETWEETERS_OP_ID、TWITTER_FAVORITERS_OP_ID、TWITTER_SEARCH_TIMELINE_OP_ID 和 TWITTER_TWEET_DETAIL_OP_ID。',
   ],
-  ['requestTimeoutMs must be a positive integer', '내부 요청 설정이 올바르지 않습니다.'],
+  ['requestTimeoutMs must be a positive integer', '内部请求配置无效。'],
 ]);
 
 const RETRY_REASON_MESSAGES = Object.freeze({
-  'rate-limit': '요청 제한으로 잠시 대기 후 재시도합니다.',
-  timeout: '응답 지연으로 재시도합니다.',
-  'request-timeout': '응답 지연으로 재시도합니다.',
-  server: '서버 오류로 재시도합니다.',
-  'graphql-error': '일시적 GraphQL 오류로 재시도합니다.',
-  'invalid-json': '응답 파싱 실패로 재시도합니다.',
+  'rate-limit': '请求受限，稍候后重试。',
+  timeout: '响应超时，正在重试。',
+  'request-timeout': '响应超时，正在重试。',
+  server: '服务器出错，正在重试。',
+  'graphql-error': 'GraphQL 暂时出错，正在重试。',
+  'invalid-json': '响应解析失败，正在重试。',
 });
 
 const TERMINATION_REASON_MESSAGES = Object.freeze({
-  end_of_timeline: '목록 끝',
-  max_pages: '최대 페이지 도달',
-  cursor_cycle: '커서 순환 감지',
-  repeated_page: '반복 페이지 감지',
-  no_growth: '수집 증가 없음',
-  invalid_or_empty_payload: '빈 응답 또는 스키마 불일치',
+  end_of_timeline: '列表末尾',
+  max_pages: '已达到最大页数',
+  cursor_cycle: '检测到游标循环',
+  repeated_page: '检测到重复页面',
+  no_growth: '收集数量未增加',
+  invalid_or_empty_payload: '响应为空或数据格式不匹配',
 });
 
 type RetryReason = keyof typeof RETRY_REASON_MESSAGES;
@@ -60,7 +60,7 @@ function resolveMappedMessage<T extends Record<string, string>>(map: T, key: str
 }
 
 function toNotEnoughParticipantsMessage(rawMessage: unknown): string {
-  const baseMessage = '추첨 가능한 참여자가 부족합니다. 당첨 인원을 줄여 주세요.';
+  const baseMessage = '符合条件的参与者不足，请减少中奖人数。';
   const matched = String(rawMessage || '').match(/requested=(\d+)\s*,\s*available=(\d+)/i);
   if (!matched) {
     return baseMessage;
@@ -72,7 +72,7 @@ function toNotEnoughParticipantsMessage(rawMessage: unknown): string {
     return baseMessage;
   }
 
-  return `${baseMessage} (추첨 인원: ${requested}명 / 대상 인원: ${available}명)`;
+  return `${baseMessage}（抽取人数：${requested} 人 / 符合条件人数：${available} 人）`;
 }
 
 function toKoreanMessage(error: unknown): string {
