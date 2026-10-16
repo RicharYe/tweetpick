@@ -14,7 +14,7 @@ async function openExternalUrl(url: string | null) {
   if (api && typeof api.openExternal === 'function') {
     const ok = await api.openExternal(target);
     if (!ok) {
-      alert('외부 링크를 열지 못했습니다.');
+      alert('无法打开外部链接。');
     }
     return;
   }

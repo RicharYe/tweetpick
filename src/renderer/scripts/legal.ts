@@ -35,21 +35,21 @@ async function syncLegalDocuments() {
 
   const api = getRtDrawApi();
   if (!api || typeof api.getLegalDocuments !== 'function') {
-    setFallback('라이선스 문서를 불러오지 못했습니다.');
+    setFallback('无法加载许可证文档。');
     return;
   }
 
   try {
     const result = await api.getLegalDocuments();
     if (!result || result.ok !== true) {
-      setFallback((result && result.message) || '라이선스 문서를 불러오지 못했습니다.');
+      setFallback((result && result.message) || '无法加载许可证文档。');
       return;
     }
 
     noticeTarget.textContent = result.notice || '';
     licenseTarget.textContent = result.license || '';
   } catch {
-    setFallback('라이선스 문서를 불러오지 못했습니다.');
+    setFallback('无法加载许可证文档。');
   }
 }
 

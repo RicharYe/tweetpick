@@ -18,7 +18,7 @@ type AppElement = HTMLElement & {
 function requireElement(id: string): AppElement {
   const element = document.getElementById(id);
   if (!element) {
-    throw new Error(`필수 요소를 찾을 수 없습니다: #${id}`);
+    throw new Error(`找不到必需的界面元素：#${id}`);
   }
   return element as AppElement;
 }
@@ -26,7 +26,7 @@ function requireElement(id: string): AppElement {
 function requireSelector(selector: string): AppElement {
   const element = document.querySelector(selector);
   if (!element) {
-    throw new Error(`Required element not found: ${selector}`);
+    throw new Error(`找不到必需的界面元素：${selector}`);
   }
   return element as AppElement;
 }
@@ -105,42 +105,42 @@ const RESULT_VISIBLE_ROWS_CAP = 10;
 const RESULT_STATS_HEIGHT = 118;
 
 const SOURCE_LABELS = Object.freeze({
-  rt: '리트윗',
-  quote: '인용',
-  reply: '답글',
-  like: '맘찍',
+  rt: '转推',
+  quote: '引用',
+  reply: '回复',
+  like: '喜欢',
 });
 
 const UI_TEXT = Object.freeze({
-  ready: '준비되었습니다.',
-  submit: '추첨 요청을 전송했습니다.',
-  runningButton: '추첨 진행 중',
-  defaultButton: '추첨 시작',
-  noResult: '추첨 대기 상태입니다.',
-  copyNoResult: '복사할 결과가 없습니다.',
-  copySuccess: '결과 텍스트를 복사했습니다.',
-  copyFailed: '결과 복사에 실패했습니다.',
-  saveNoResult: '저장할 결과가 없습니다.',
-  saveSuccess: '결과 이미지 저장이 완료되었습니다.',
-  saveFailed: '결과 이미지 저장에 실패했습니다.',
-  drawFailed: '추첨 실행에 실패했습니다.',
-  drawError: '추첨 실행 중 오류가 발생했습니다.',
-  invalidForm: '입력값을 확인해 주세요.',
-  missingBridge: '앱 연결을 불러오지 못했습니다. 앱을 다시 실행해 주세요.',
-  requiredAuthToken: 'auth_token을 입력해 주세요.',
-  requiredCt0: 'ct0를 입력해 주세요.',
-  requiredTweetUrl: '트윗 링크를 입력해 주세요.',
-  invalidTweetUrl: '트윗 링크 형식이 올바르지 않습니다.',
-  invalidTweetHost: '트윗 링크는 x.com 또는 twitter.com 이어야 합니다.',
-  invalidTweetStatus: 'status가 포함된 트윗 링크를 입력해 주세요.',
-  invalidWinners: '추첨 인원은 1 이상의 정수여야 합니다.',
-  invalidMinFollowers: '팔로워 최소값은 0 이상의 정수여야 합니다.',
-  requiredSource: '참여 소스를 하나 이상 선택해 주세요.',
-  statsShow: '상세 통계',
-  statsHide: '상세 통계 닫기',
-  openLinkFailed: (label: string) => `${label} 링크를 열지 못했습니다.`,
-  done: (count: number) => `추첨 완료: ${count}명`,
-  idFallback: '(아이디 없음)',
+  ready: '已就绪。',
+  submit: '已发送抽奖请求。',
+  runningButton: '正在抽奖',
+  defaultButton: '开始抽奖',
+  noResult: '等待抽奖。',
+  copyNoResult: '没有可复制的结果。',
+  copySuccess: '已复制结果文本。',
+  copyFailed: '复制结果失败。',
+  saveNoResult: '没有可保存的结果。',
+  saveSuccess: '结果图片已保存。',
+  saveFailed: '保存结果图片失败。',
+  drawFailed: '抽奖失败。',
+  drawError: '抽奖时发生错误。',
+  invalidForm: '请检查输入内容。',
+  missingBridge: '无法连接应用，请重新启动应用。',
+  requiredAuthToken: '请输入 auth_token。',
+  requiredCt0: '请输入 ct0。',
+  requiredTweetUrl: '请输入推文链接。',
+  invalidTweetUrl: '推文链接格式不正确。',
+  invalidTweetHost: '推文链接必须来自 x.com 或 twitter.com。',
+  invalidTweetStatus: '请输入包含 status 的推文链接。',
+  invalidWinners: '中奖人数必须是大于或等于 1 的整数。',
+  invalidMinFollowers: '最低粉丝数必须是大于或等于 0 的整数。',
+  requiredSource: '请至少选择一种参与类型。',
+  statsShow: '详细统计',
+  statsHide: '收起统计',
+  openLinkFailed: (label: string) => `无法打开${label}链接。`,
+  done: (count: number) => `抽奖完成：${count} 人`,
+  idFallback: '（无用户名）',
 });
 
 interface AppState {
@@ -233,11 +233,11 @@ function formatNumber(value: unknown) {
   if (!Number.isFinite(parsed)) {
     return '0';
   }
-  return parsed.toLocaleString('ko-KR');
+  return parsed.toLocaleString('zh-CN');
 }
 
 function formatCount(value: unknown) {
-  return `${formatNumber(value)}명`;
+  return `${formatNumber(value)} 人`;
 }
 
 function appendLog(message: string, type: 'info' | 'error' | 'retry' = 'info') {
@@ -470,15 +470,15 @@ function resetSummary() {
 }
 
 function resetStats() {
-  elements.sourceStatRt.textContent = '리트윗: -';
-  elements.sourceStatLike.textContent = '맘찍: -';
-  elements.sourceStatQuote.textContent = '인용: -';
-  elements.sourceStatReply.textContent = '답글: -';
-  elements.filterStatIntersection.textContent = '소스 교집합: -';
-  elements.filterStatAfterKeyword.textContent = '키워드 통과: -';
-  elements.filterStatAfterProfile.textContent = '조건 통과: -';
-  elements.filterStatExcludedKeyword.textContent = '키워드 제외: -';
-  elements.filterStatExcludedProfile.textContent = '조건 제외: -';
+  elements.sourceStatRt.textContent = '转推：-';
+  elements.sourceStatLike.textContent = '喜欢：-';
+  elements.sourceStatQuote.textContent = '引用：-';
+  elements.sourceStatReply.textContent = '回复：-';
+  elements.filterStatIntersection.textContent = '来源交集：-';
+  elements.filterStatAfterKeyword.textContent = '关键词筛选后：-';
+  elements.filterStatAfterProfile.textContent = '条件筛选后：-';
+  elements.filterStatExcludedKeyword.textContent = '关键词排除：-';
+  elements.filterStatExcludedProfile.textContent = '条件排除：-';
 }
 
 function setResultActionsEnabled(enabled: boolean): void {
@@ -627,34 +627,34 @@ function renderNoWinnerRow() {
   const row = document.createElement('tr');
   const cell = document.createElement('td');
   cell.colSpan = 3;
-  cell.textContent = '당첨자가 없습니다.';
+  cell.textContent = '没有中奖者。';
   row.appendChild(cell);
   elements.winnerRows.appendChild(row);
 }
 
 function renderSourceStatLine(label: string, sourceStat: SourceStat | null | undefined): string {
   if (!sourceStat || sourceStat.selected !== true) {
-    return `${label}: 미선택`;
+    return `${label}：未选择`;
   }
 
-  const termination = sourceStat.terminationReasonKorean || '사유 없음';
-  return `${label}: 수집 ${formatNumber(sourceStat.totalUnique)} / 종료 ${termination}`;
+  const termination = sourceStat.terminationReasonChinese || '无原因';
+  return `${label}：已收集 ${formatNumber(sourceStat.totalUnique)} / 结束原因：${termination}`;
 }
 
 function renderStats(result: RtDrawResult) {
   const sourceStats = result.sourceStats;
   const filterStats = result.filterStats;
 
-  elements.sourceStatRt.textContent = renderSourceStatLine('리트윗', sourceStats.rt);
-  elements.sourceStatLike.textContent = renderSourceStatLine('맘찍', sourceStats.like);
-  elements.sourceStatQuote.textContent = renderSourceStatLine('인용', sourceStats.quote);
-  elements.sourceStatReply.textContent = renderSourceStatLine('답글', sourceStats.reply);
+  elements.sourceStatRt.textContent = renderSourceStatLine('转推', sourceStats.rt);
+  elements.sourceStatLike.textContent = renderSourceStatLine('喜欢', sourceStats.like);
+  elements.sourceStatQuote.textContent = renderSourceStatLine('引用', sourceStats.quote);
+  elements.sourceStatReply.textContent = renderSourceStatLine('回复', sourceStats.reply);
 
-  elements.filterStatIntersection.textContent = `소스 교집합: ${formatCount(filterStats.intersectionCount || 0)}`;
-  elements.filterStatAfterKeyword.textContent = `키워드 통과: ${formatCount(filterStats.afterKeywordCount || 0)}`;
-  elements.filterStatAfterProfile.textContent = `조건 통과: ${formatCount(filterStats.afterProfileCount || 0)}`;
-  elements.filterStatExcludedKeyword.textContent = `키워드 제외: ${formatCount(filterStats.excludedByKeyword || 0)}`;
-  elements.filterStatExcludedProfile.textContent = `조건 제외: ${formatCount(filterStats.excludedByProfile || 0)}`;
+  elements.filterStatIntersection.textContent = `来源交集：${formatCount(filterStats.intersectionCount || 0)}`;
+  elements.filterStatAfterKeyword.textContent = `关键词筛选后：${formatCount(filterStats.afterKeywordCount || 0)}`;
+  elements.filterStatAfterProfile.textContent = `条件筛选后：${formatCount(filterStats.afterProfileCount || 0)}`;
+  elements.filterStatExcludedKeyword.textContent = `关键词排除：${formatCount(filterStats.excludedByKeyword || 0)}`;
+  elements.filterStatExcludedProfile.textContent = `条件排除：${formatCount(filterStats.excludedByProfile || 0)}`;
 }
 
 function renderResult(result: RtDrawResult) {
@@ -677,7 +677,7 @@ function renderResult(result: RtDrawResult) {
   elements.summaryUnique.textContent = formatCount(Number.isFinite(result.eligibleCount) ? result.eligibleCount : 0);
 
   renderStats(result);
-  appendLog(`추첨 시드: ${drawResult.seed || '-'}`, 'info');
+  appendLog(`抽奖种子：${drawResult.seed || '-'}`, 'info');
 
   elements.winnerRows.innerHTML = '';
   if (winners.length === 0) {
@@ -731,25 +731,25 @@ function applyProgress(progress: DrawProgressEvent) {
   }
 
   if (progress.type === 'status') {
-    appendLog(progress.message || '진행 상태가 갱신되었습니다.', 'info');
+    appendLog(progress.message || '进度已更新。', 'info');
     return;
   }
 
   if (progress.type === 'retry') {
-    const sourceLabel = SOURCE_LABELS[progress.source] || '알 수 없음';
+    const sourceLabel = SOURCE_LABELS[progress.source] || '未知';
     const attempt = Number(progress.attempt) || 1;
     const waitSec = Math.max(1, Math.round((Number(progress.waitMs) || 0) / 1000));
-    const message = progress.message || '일시적 오류로 재시도합니다.';
-    appendLog(`[${sourceLabel}] ${message} (시도 ${attempt}, ${waitSec}초 대기)`, 'retry');
+    const message = progress.message || '发生暂时性错误，正在重试。';
+    appendLog(`[${sourceLabel}] ${message}（第 ${attempt} 次尝试，等待 ${waitSec} 秒）`, 'retry');
     return;
   }
 
   if (progress.type === 'collect-source') {
-    const sourceLabel = SOURCE_LABELS[progress.source] || '알 수 없음';
+    const sourceLabel = SOURCE_LABELS[progress.source] || '未知';
     const pages = Number(progress.pagesFetched) || 0;
     const total = Number(progress.totalUnique) || 0;
     const added = Number(progress.addedOnPage) || 0;
-    appendLog(`[${sourceLabel}] 페이지 ${pages} | 고유 ${formatNumber(total)} | 이번 +${formatNumber(added)}`, 'info');
+    appendLog(`[${sourceLabel}] 页数 ${pages} | 去重后 ${formatNumber(total)} | 本次新增 +${formatNumber(added)}`, 'info');
   }
 }
 
@@ -759,15 +759,15 @@ function buildCopyText(result: RtDrawResult) {
   const tweetLink = result.author && result.tweetId ? `https://x.com/${result.author}/status/${result.tweetId}` : '-';
 
   const lines = [];
-  lines.push('=== RT 추첨 결과 ===');
-  lines.push(`기준 트윗: ${tweetLink}`);
-  lines.push(`추첨 인원: ${formatCount(result.winnersRequested || winners.length)}`);
-  lines.push(`참여자: ${formatCount(Number.isFinite(result.eligibleCount) ? result.eligibleCount : 0)}`);
+  lines.push('=== 转推抽奖结果 ===');
+  lines.push(`目标推文：${tweetLink}`);
+  lines.push(`中奖人数：${formatCount(result.winnersRequested || winners.length)}`);
+  lines.push(`参与者：${formatCount(Number.isFinite(result.eligibleCount) ? result.eligibleCount : 0)}`);
   lines.push('');
-  lines.push('당첨자 목록');
+  lines.push('中奖名单');
 
   if (winners.length === 0) {
-    lines.push('- 없음');
+    lines.push('- 无');
     return lines.join('\n');
   }
 
@@ -807,7 +807,7 @@ async function copyResult() {
     } else {
       const copied = copyWithTextareaFallback(text);
       if (!copied) {
-        throw new Error('복사 실패');
+        throw new Error('复制失败');
       }
     }
     appendLog(UI_TEXT.copySuccess, 'info');
@@ -885,12 +885,12 @@ async function openInfoPage() {
   try {
     const ok = await api.openInfoPage();
     if (!ok) {
-      appendLog('안내 창을 열지 못했습니다.', 'error');
-      showToast('안내 창을 열지 못했습니다.', 'error');
+      appendLog('无法打开说明窗口。', 'error');
+      showToast('无法打开说明窗口。', 'error');
     }
   } catch {
-    appendLog('안내 창을 열지 못했습니다.', 'error');
-    showToast('안내 창을 열지 못했습니다.', 'error');
+    appendLog('无法打开说明窗口。', 'error');
+    showToast('无法打开说明窗口。', 'error');
   }
 }
 
@@ -904,12 +904,12 @@ async function openLegalPage() {
   try {
     const ok = await api.openLegalPage();
     if (!ok) {
-      appendLog('라이선스 창을 열지 못했습니다.', 'error');
-      showToast('라이선스 창을 열지 못했습니다.', 'error');
+      appendLog('无法打开许可证窗口。', 'error');
+      showToast('无法打开许可证窗口。', 'error');
     }
   } catch {
-    appendLog('라이선스 창을 열지 못했습니다.', 'error');
-    showToast('라이선스 창을 열지 못했습니다.', 'error');
+    appendLog('无法打开许可证窗口。', 'error');
+    showToast('无法打开许可证窗口。', 'error');
   }
 }
 
@@ -965,8 +965,8 @@ function applyWindowState(payload: WindowStatePayload | null | undefined): void 
   const isMaximized = payload.isMaximized === true;
   state.isWindowMaximized = isMaximized;
   elements.windowChrome.classList.toggle('window-chrome-maximized', isMaximized);
-  elements.windowMaximize.dataset.tooltip = isMaximized ? '복원' : '최대화';
-  elements.windowMaximize.setAttribute('aria-label', isMaximized ? '복원' : '최대화');
+  elements.windowMaximize.dataset.tooltip = isMaximized ? '还原' : '最大化';
+  elements.windowMaximize.setAttribute('aria-label', isMaximized ? '还原' : '最大化');
   elements.windowMaximize.innerHTML = createWindowControlIcon(isMaximized ? 'restore' : 'maximize');
 }
 
