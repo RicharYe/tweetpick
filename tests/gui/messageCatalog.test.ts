@@ -5,33 +5,33 @@ import { toKoreanMessage, toRetryMessage, mapTerminationReason } from '@main/mes
 
 test('toKoreanMessage maps known fragment', () => {
   const message = toKoreanMessage(new Error('`--auth-token` is required.'));
-  assert.equal(message, 'auth_token을 입력해 주세요.');
+  assert.equal(message, '请输入 auth_token。');
 });
 
 test('toKoreanMessage returns fallback for unknown error', () => {
   const message = toKoreanMessage(new Error('unexpected unknown error'));
-  assert.equal(message, '추첨 중 오류가 발생했습니다. 입력값을 확인한 뒤 다시 시도해 주세요.');
+  assert.equal(message, '抽奖时发生错误。请检查输入后重试。');
 });
 
 test('toKoreanMessage includes counts for not-enough-participants error', () => {
   const message = toKoreanMessage(new Error('Not enough participants. requested=40, available=7'));
-  assert.equal(message, '추첨 가능한 참여자가 부족합니다. 당첨 인원을 줄여 주세요. (추첨 인원: 40명 / 대상 인원: 7명)');
+  assert.equal(message, '符合条件的参与者不足，请减少中奖人数。（抽取人数：40 人 / 符合条件人数：7 人）');
 });
 
 test('toKoreanMessage falls back to base not-enough message when count parsing fails', () => {
   const malformed = toKoreanMessage(new Error('Not enough participants without count details'));
-  assert.equal(malformed, '추첨 가능한 참여자가 부족합니다. 당첨 인원을 줄여 주세요.');
+  assert.equal(malformed, '符合条件的参与者不足，请减少中奖人数。');
 
   const invalidNumbers = toKoreanMessage(new Error('Not enough participants. requested=NaN, available=abc'));
-  assert.equal(invalidNumbers, '추첨 가능한 참여자가 부족합니다. 당첨 인원을 줄여 주세요.');
+  assert.equal(invalidNumbers, '符合条件的参与者不足，请减少中奖人数。');
 });
 
 test('toRetryMessage maps reason and falls back', () => {
-  assert.equal(toRetryMessage('request-timeout'), '응답 지연으로 재시도합니다.');
-  assert.equal(toRetryMessage('unknown-retry'), '일시적 오류로 재시도합니다.');
+  assert.equal(toRetryMessage('request-timeout'), '响应超时，正在重试。');
+  assert.equal(toRetryMessage('unknown-retry'), '发生暂时性错误，正在重试。');
 });
 
 test('mapTerminationReason maps reason and falls back', () => {
-  assert.equal(mapTerminationReason('cursor_cycle'), '커서 순환 감지');
-  assert.equal(mapTerminationReason('something-else'), '알 수 없음');
+  assert.equal(mapTerminationReason('cursor_cycle'), '检测到游标循环');
+  assert.equal(mapTerminationReason('something-else'), '未知');
 });
