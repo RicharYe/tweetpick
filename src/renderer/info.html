@@ -1,54 +1,53 @@
 <!doctype html>
-<html lang="ko">
+<html lang="zh-CN">
   <head>
     <meta charset="UTF-8" />
     <meta
       http-equiv="Content-Security-Policy"
       content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data: file:; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'"
     />
-    <title>사용 방법 안내</title>
+    <title>使用说明</title>
     <link rel="stylesheet" href="./styles/info.css" />
   </head>
   <body>
     <main class="info-shell">
       <div class="info-content">
         <section class="info-block">
-          <h2>사용 방법 안내</h2>
+          <h2>使用说明</h2>
           <ol class="info-list">
-            <li>Cookie-Editor 브라우저 확장을 설치합니다.</li>
-            <li>X(x.com)에 로그인한 상태에서 확장을 실행합니다.</li>
-            <li>쿠키 목록에서 <code>auth_token</code>, <code>ct0</code> 값을 복사합니다.</li>
-            <li>메인 화면에 트윗 링크를 입력합니다.</li>
-            <li>추첨 설정을 입력한 뒤 추첨을 실행합니다.</li>
+            <li>安装 Cookie-Editor 浏览器扩展。</li>
+            <li>登录 X（x.com）后打开扩展。</li>
+            <li>从 Cookie 列表中复制 <code>auth_token</code> 和 <code>ct0</code> 的值。</li>
+            <li>在主界面输入推文链接。</li>
+            <li>设置抽奖条件后开始抽奖。</li>
           </ol>
-          <p class="info-note">※ 기준 계정은 입력한 <code>auth_token</code>/<code>ct0</code> 소유 계정입니다.</p>
+          <p class="info-note">※ 抽奖账号是所填 <code>auth_token</code>/<code>ct0</code> 所属的账号。</p>
           <p class="info-note">
-            ※ <code>auth_token</code>/<code>ct0</code> 값을 정확히 추출할 수 있다면 Cookie-Editor 외 방법도 사용할 수
-            있습니다.
+            ※ 如果能准确提取 <code>auth_token</code>/<code>ct0</code>，也可以使用 Cookie-Editor 以外的方法。
           </p>
         </section>
 
         <section class="info-block notice">
-          <h2>주의</h2>
+          <h2>注意事项</h2>
           <ul class="info-list unordered">
-            <li>쿠키 값을 앞뒤 공백 없이 그대로 입력해야 합니다.</li>
-            <li>로그아웃/계정 전환 후에는 쿠키 값이 바뀔 수 있습니다.</li>
-            <li><code>auth_token</code>, <code>ct0</code>는 민감 정보이므로 절대 타인에게 공유하지 마세요.</li>
+            <li>输入 Cookie 值时请勿添加前后空格。</li>
+            <li>退出登录或切换账号后，Cookie 值可能会变化。</li>
+            <li><code>auth_token</code> 和 <code>ct0</code> 属于敏感信息，请勿分享给他人。</li>
           </ul>
         </section>
 
         <section class="info-block">
-          <h2>프로그램 정보</h2>
-          <p class="program-name">TweetPick (트윗픽)</p>
-          <p class="program-version">버전 <span id="app-version">-</span></p>
-          <p class="program-description">X(트위터) 게시물 참여자를 집계해 조건에 맞는 당첨자를 무작위로 추첨하는 프로그램입니다.</p>
+          <h2>软件信息</h2>
+          <p class="program-name">TweetPick</p>
+          <p class="program-version">版本 <span id="app-version">-</span></p>
+          <p class="program-description">统计 X 帖子的参与者，并按指定条件随机抽取中奖者。</p>
           <div class="about-social-links">
             <a
               href="https://github.com/selentia/tweetpick"
               data-external-url="https://github.com/selentia/tweetpick"
               class="social-link-btn"
-              aria-label="GitHub 열기"
-              title="GitHub 열기"
+              aria-label="打开 GitHub"
+              title="打开 GitHub"
             >
               <img class="social-link-icon" src="./assets/icons/github_icon.png" alt="" draggable="false" />
             </a>
@@ -56,8 +55,8 @@
               href="https://x.com/selentia01"
               data-external-url="https://x.com/selentia01"
               class="social-link-btn"
-              aria-label="X 열기"
-              title="X 열기"
+              aria-label="打开 X"
+              title="打开 X"
             >
               <img class="social-link-icon" src="./assets/icons/x_icon.png" alt="" draggable="false" />
             </a>
@@ -72,9 +71,9 @@
           class="footer-btn footer-btn-primary"
           data-external-url="https://chromewebstore.google.com/detail/cookie-editor/hlkenndednhfkekhgcdicdfddnkalmdm"
         >
-          Cookie-Editor 열기
+          打开 Cookie-Editor
         </button>
-        <button id="close-info" class="footer-btn footer-btn-ghost" type="button">닫기</button>
+        <button id="close-info" class="footer-btn footer-btn-ghost" type="button">关闭</button>
       </footer>
     </main>
 

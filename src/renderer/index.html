@@ -1,5 +1,5 @@
 ﻿<!doctype html>
-<html lang="ko">
+<html lang="zh-CN">
   <head>
     <meta charset="UTF-8" />
     <meta
@@ -22,7 +22,7 @@
 
             <div class="window-chrome-right no-drag">
               <details id="chrome-menu" class="chrome-menu">
-                <summary class="chrome-settings-trigger has-tooltip" data-tooltip="메뉴 열기" aria-label="메뉴 열기">
+                <summary class="chrome-settings-trigger has-tooltip" data-tooltip="打开菜单" aria-label="打开菜单">
                   <svg viewBox="0 0 16 16" aria-hidden="true" focusable="false">
                     <path
                       fill="currentColor"
@@ -35,9 +35,9 @@
 
                 <div class="chrome-menu-body chrome-menu-body--right">
                   <div class="chrome-menu-group">
-                    <div class="chrome-menu-group-label">도움말</div>
-                    <button id="menu-open-info" class="chrome-menu-item" type="button">사용 방법 열기</button>
-                    <button id="menu-open-legal" class="chrome-menu-item" type="button">라이선스</button>
+                    <div class="chrome-menu-group-label">帮助</div>
+                    <button id="menu-open-info" class="chrome-menu-item" type="button">查看使用说明</button>
+                    <button id="menu-open-legal" class="chrome-menu-item" type="button">许可证</button>
                   </div>
                 </div>
               </details>
@@ -46,8 +46,8 @@
                 id="window-minimize"
                 type="button"
                 class="chrome-control control-minimize has-tooltip"
-                data-tooltip="최소화"
-                aria-label="최소화"
+                data-tooltip="最小化"
+                aria-label="最小化"
               >
                 <svg viewBox="0 0 16 16" aria-hidden="true" focusable="false">
                   <path d="M4 8.5h8" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="square" />
@@ -58,8 +58,8 @@
                 id="window-maximize"
                 type="button"
                 class="chrome-control control-maximize has-tooltip"
-                data-tooltip="최대화"
-                aria-label="최대화"
+                data-tooltip="最大化"
+                aria-label="最大化"
               >
                 <svg viewBox="0 0 16 16" aria-hidden="true" focusable="false">
                   <rect x="3.5" y="3.5" width="9" height="9" fill="none" stroke="currentColor" stroke-width="1.4" />
@@ -70,8 +70,8 @@
                 id="window-close"
                 type="button"
                 class="chrome-control control-close has-tooltip"
-                data-tooltip="닫기"
-                aria-label="닫기"
+                data-tooltip="关闭"
+                aria-label="关闭"
               >
                 <svg viewBox="0 0 16 16" aria-hidden="true" focusable="false">
                   <path
@@ -95,7 +95,7 @@
                   <path d="M4.5 3.5v13l11-6.5z" />
                 </svg>
               </span>
-              <span>추첨 시작</span>
+              <span>开始抽奖</span>
             </button>
 
             <button id="copy-button" class="btn ghost" type="button" disabled>
@@ -107,7 +107,7 @@
                   />
                 </svg>
               </span>
-              <span>결과 텍스트 복사</span>
+              <span>复制结果文本</span>
             </button>
 
             <button id="save-image-button" class="btn ghost" type="button" disabled>
@@ -119,10 +119,10 @@
                   />
                 </svg>
               </span>
-              <span>결과 이미지 저장</span>
+              <span>保存结果图片</span>
             </button>
 
-            <button id="link-info" class="btn ghost" type="button">안내</button>
+            <button id="link-info" class="btn ghost" type="button">说明</button>
           </div>
         </section>
 
@@ -130,10 +130,10 @@
           <section class="left-stack">
             <section class="input-panel">
               <form id="draw-form" class="draw-form" novalidate>
-                <div class="panel-title">추첨 조건</div>
+                <div class="panel-title">抽奖条件</div>
 
                 <div class="form-section">
-                  <div class="form-section-title">인증 정보</div>
+                  <div class="form-section-title">身份验证信息</div>
 
                   <label class="control-line" for="auth-token">
                     <span class="control-label">auth_token</span>
@@ -165,16 +165,16 @@
                 </div>
 
                 <div class="form-section">
-                  <div class="form-section-title">대상 게시물</div>
+                  <div class="form-section-title">目标帖子</div>
 
                   <label class="control-line" for="tweet-url">
-                    <span class="control-label">트윗 링크</span>
+                    <span class="control-label">推文链接</span>
                     <input
                       id="tweet-url"
                       name="tweetUrl"
                       class="compact-field compact-url"
                       type="url"
-                      placeholder="https://x.com/&lt;작성자&gt;/status/&lt;트윗ID&gt;"
+                      placeholder="https://x.com/&lt;用户名&gt;/status/&lt;推文ID&gt;"
                       autocomplete="off"
                       spellcheck="false"
                       required
@@ -184,9 +184,9 @@
                 </div>
 
                 <div class="form-section">
-                  <div class="form-section-title">추첨 설정</div>
+                  <div class="form-section-title">抽奖设置</div>
                   <label class="control-line" for="winners">
-                    <span class="control-label">추첨 인원</span>
+                    <span class="control-label">中奖人数</span>
                     <input
                       id="winners"
                       name="winners"
@@ -203,75 +203,75 @@
 
                   <div class="settings-stack">
                     <div class="settings-group">
-                      <div class="settings-group-title">집계 대상</div>
+                      <div class="settings-group-title">参与类型</div>
                       <div class="check-row-set">
                         <label class="check-line" for="source-rt">
                           <input id="source-rt" type="checkbox" checked />
-                          <span>리트윗</span>
+                          <span>转推</span>
                         </label>
                         <label class="check-line" for="source-quote">
                           <input id="source-quote" type="checkbox" />
-                          <span>인용</span>
+                          <span>引用</span>
                         </label>
                         <label class="check-line" for="source-reply">
                           <input id="source-reply" type="checkbox" />
-                          <span>답글</span>
+                          <span>回复</span>
                         </label>
                         <label class="check-line" for="source-like">
                           <input id="source-like" type="checkbox" />
-                          <span>맘찍</span>
+                          <span>喜欢</span>
                         </label>
                       </div>
 
                       <div class="check-row-set source-match-row">
                         <label class="check-line" for="source-match-any">
                           <input id="source-match-any" name="source-match-mode" type="radio" checked />
-                          <span>합집합</span>
+                          <span>并集</span>
                         </label>
                         <label class="check-line" for="source-match-all">
                           <input id="source-match-all" name="source-match-mode" type="radio" />
-                          <span>교집합</span>
+                          <span>交集</span>
                         </label>
                       </div>
                     </div>
 
                     <div class="settings-group">
-                      <div class="settings-group-title">텍스트 조건</div>
+                      <div class="settings-group-title">文本条件</div>
                       <label class="control-line" for="filter-keyword">
-                        <span class="control-label">키워드</span>
+                        <span class="control-label">关键词</span>
                         <input
                           id="filter-keyword"
                           class="compact-field compact-url"
                           type="text"
-                          placeholder="인용/답글 텍스트 포함 키워드"
+                          placeholder="引用或回复内容中需要包含的关键词"
                           autocomplete="off"
                         />
                       </label>
                     </div>
 
                     <div class="settings-group">
-                      <div class="settings-group-title">계정 조건</div>
+                      <div class="settings-group-title">账号条件</div>
                       <div class="toggle-line">
                         <label class="check-line" for="filter-require-participant-follows-auth">
                           <input id="filter-require-participant-follows-auth" type="checkbox" />
-                          <span>참여자 → 기준 계정 팔로우</span>
+                          <span>参与者关注抽奖账号</span>
                         </label>
                       </div>
 
                       <div class="toggle-line">
                         <label class="check-line" for="filter-require-auth-follows-participant">
                           <input id="filter-require-auth-follows-participant" type="checkbox" />
-                          <span>기준 계정 → 참여자 팔로우</span>
+                          <span>抽奖账号关注参与者</span>
                         </label>
                       </div>
 
                       <div class="toggle-line">
                         <label class="check-line" for="filter-min-followers-enabled">
                           <input id="filter-min-followers-enabled" type="checkbox" />
-                          <span>팔로워 수 조건</span>
+                          <span>最低粉丝数</span>
                         </label>
                         <label class="mini-input" for="filter-min-followers">
-                          <span>최소</span>
+                          <span>最少</span>
                           <input
                             id="filter-min-followers"
                             class="compact-field compact-mini"
@@ -283,7 +283,7 @@
                           />
                         </label>
                       </div>
-                      <p class="settings-note">※ 기준 계정은 입력한 auth_token/ct0 소유 계정입니다.</p>
+                      <p class="settings-note">※ 抽奖账号是 auth_token/ct0 所属账号。</p>
                     </div>
                   </div>
                 </div>
@@ -294,7 +294,7 @@
 
             <article id="result-panel" class="result-panel">
               <div class="result-panel-head">
-                <h2 class="panel-title">추첨 결과</h2>
+                <h2 class="panel-title">抽奖结果</h2>
                 <button
                   id="toggle-stats-button"
                   class="btn ghost btn-inline"
@@ -302,23 +302,23 @@
                   aria-expanded="false"
                   disabled
                 >
-                  상세 통계
+                  详细统计
                 </button>
               </div>
-              <p id="result-empty" class="result-empty">추첨 대기 상태입니다.</p>
+              <p id="result-empty" class="result-empty">等待抽奖。</p>
 
               <div id="result-content" class="result-content" hidden>
                 <div class="summary-grid">
                   <div class="summary-row">
-                    <span>기준 트윗</span>
+                    <span>目标推文</span>
                     <strong id="summary-target">-</strong>
                   </div>
                   <div class="summary-row">
-                    <span>참여자</span>
+                    <span>参与者</span>
                     <strong id="summary-unique">-</strong>
                   </div>
                   <div class="summary-row">
-                    <span>추첨 인원</span>
+                    <span>中奖人数</span>
                     <strong id="summary-winners">-</strong>
                   </div>
                 </div>
@@ -326,13 +326,13 @@
                 <div class="result-table-wrap">
                   <table class="result-table">
                     <caption class="sr-only">
-                      당첨자 목록
+                      中奖名单
                     </caption>
                     <thead>
                       <tr>
                         <th scope="col">#</th>
-                        <th scope="col">아이디</th>
-                        <th scope="col">닉네임</th>
+                        <th scope="col">用户名</th>
+                        <th scope="col">昵称</th>
                       </tr>
                     </thead>
                     <tbody id="winner-rows"></tbody>
@@ -342,20 +342,20 @@
                 <div id="stats-section" class="stats-section hidden">
                   <div class="stats-grid">
                     <div class="stats-block">
-                      <div class="stats-title">소스 통계</div>
+                      <div class="stats-title">来源统计</div>
                       <div id="source-stat-rt" class="stats-line">RT: -</div>
-                      <div id="source-stat-like" class="stats-line">맘찍: -</div>
-                      <div id="source-stat-quote" class="stats-line">인용: -</div>
-                      <div id="source-stat-reply" class="stats-line">답글: -</div>
+                      <div id="source-stat-like" class="stats-line">喜欢：-</div>
+                      <div id="source-stat-quote" class="stats-line">引用：-</div>
+                      <div id="source-stat-reply" class="stats-line">回复：-</div>
                     </div>
 
                     <div class="stats-block">
-                      <div class="stats-title">필터 통계</div>
-                      <div id="filter-stat-intersection" class="stats-line">소스 통과: -</div>
-                      <div id="filter-stat-after-keyword" class="stats-line">키워드 통과: -</div>
-                      <div id="filter-stat-after-profile" class="stats-line">최종 대상: -</div>
-                      <div id="filter-stat-excluded-keyword" class="stats-line">키워드 제외: -</div>
-                      <div id="filter-stat-excluded-profile" class="stats-line">조건 제외: -</div>
+                      <div class="stats-title">筛选统计</div>
+                      <div id="filter-stat-intersection" class="stats-line">来源筛选后：-</div>
+                      <div id="filter-stat-after-keyword" class="stats-line">关键词筛选后：-</div>
+                      <div id="filter-stat-after-profile" class="stats-line">最终候选：-</div>
+                      <div id="filter-stat-excluded-keyword" class="stats-line">关键词排除：-</div>
+                      <div id="filter-stat-excluded-profile" class="stats-line">条件排除：-</div>
                     </div>
                   </div>
                 </div>
@@ -364,7 +364,7 @@
           </section>
 
           <article class="log-panel">
-            <h2 class="panel-title">로그</h2>
+            <h2 class="panel-title">日志</h2>
             <div id="log-box" class="log-box" aria-live="polite"></div>
           </article>
         </section>
@@ -373,9 +373,9 @@
           <button
             id="link-github"
             class="social-link-btn has-tooltip"
-            data-tooltip="Github 열기"
+            data-tooltip="打开 GitHub"
             type="button"
-            aria-label="Github 열기"
+            aria-label="打开 GitHub"
           >
             <img
               class="social-link-icon"
@@ -389,9 +389,9 @@
           <button
             id="link-twitter"
             class="social-link-btn has-tooltip"
-            data-tooltip="X 열기"
+            data-tooltip="打开 X"
             type="button"
-            aria-label="X 열기"
+            aria-label="打开 X"
           >
             <img class="social-link-icon" src="./assets/icons/x_icon.png" alt="" aria-hidden="true" draggable="false" />
           </button>
@@ -400,7 +400,7 @@
 
       <aside id="toast" class="toast hidden" aria-live="polite">
         <div id="toast-message" class="toast-message"></div>
-        <button id="toast-close" class="toast-close" type="button" aria-label="닫기">×</button>
+        <button id="toast-close" class="toast-close" type="button" aria-label="关闭">×</button>
       </aside>
     </div>
 
