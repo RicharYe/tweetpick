@@ -637,7 +637,7 @@ function renderSourceStatLine(label: string, sourceStat: SourceStat | null | und
     return `${label}：未选择`;
   }
 
-  const termination = sourceStat.terminationReasonChinese || '无原因';
+  const termination = sourceStat.terminationReasonKorean || '无原因';
   return `${label}：已收集 ${formatNumber(sourceStat.totalUnique)} / 结束原因：${termination}`;
 }
 
